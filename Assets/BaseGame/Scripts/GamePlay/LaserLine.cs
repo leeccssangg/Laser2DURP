@@ -65,8 +65,8 @@ public class LaserLine : ACachedMonoBehaviour
             _tween = DOVirtual.DelayedCall(0f, () =>
             {
                 // Animate the LineRenderer from startPos to endPos
-
-                DOTween.To(() => Laser.GetPosition(1), x => Laser.SetPosition(1, x), EndPos, 0.15f)
+                float time = Vector3.Distance(StartPos, EndPos) / 200f;
+                DOTween.To(() => Laser.GetPosition(1), x => Laser.SetPosition(1, x), EndPos, time)
                        .OnUpdate(OnDrawing)
                        .OnComplete(OnDrawCompleted)
                        .SetEase(Ease.Linear);
