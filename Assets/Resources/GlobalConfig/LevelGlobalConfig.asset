@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fad9dab5cb6e2f4aae9ab577d678700, type: 3}
+  m_Name: LevelGlobalConfig
+  m_EditorClassIdentifier: 
+  LevelConfigs:
+  - level: 1
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: 0, y: -15}
+      direction: {x: -1, y: 0}
+    - type: 1
+      position: {x: 0, y: 20}
+      direction: {x: 0, y: 1}
+  - level: 2
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -10, y: -15}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 10, y: 0}
+      direction: {x: 0, y: -1}
+    - type: 2
+      position: {x: -10, y: 0}
+      direction: {x: 0, y: 1}
+    - type: 1
+      position: {x: 10, y: 20}
+      direction: {x: 0, y: 1}
+  - level: 3
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: 0, y: -15}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 0, y: 10}
+      direction: {x: 1, y: 0}
+    - type: 2
+      position: {x: -10, y: 0}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: -10, y: 10}
+      direction: {x: 0, y: 1}
+    - type: 1
+      position: {x: 10, y: 0}
+      direction: {x: 0, y: 1}
+  - level: 4
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -5, y: -15}
+      direction: {x: -1, y: 0}
+    - type: 0
+      position: {x: 5, y: -25}
+      direction: {x: 1, y: 0}
+    - type: 2
+      position: {x: 15, y: 10}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: -15, y: 0}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: -5, y: 10}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 5, y: 0}
+      direction: {x: 0, y: 1}
+    - type: 1
+      position: {x: -15, y: 30}
+      direction: {x: 0, y: 1}
+    - type: 1
+      position: {x: 15, y: 30}
+      direction: {x: 0, y: 1}
+  - level: 5
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -5, y: -15}
+      direction: {x: 1, y: 0}
+    - type: 0
+      position: {x: 5, y: -15}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 15, y: 0}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: -15, y: 0}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: -5, y: 0}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 5, y: 0}
+      direction: {x: 0, y: 1}
+    - type: 1
+      position: {x: -15, y: 30}
+      direction: {x: 0, y: 1}
+    - type: 1
+      position: {x: 15, y: 30}
+      direction: {x: 0, y: 1}
+  - level: 6
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -5, y: -15}
+      direction: {x: 1, y: 0}
+    - type: 0
+      position: {x: 5, y: 15}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 15, y: 25}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: -15, y: -25}
+      direction: {x: 0, y: -1}
+    - type: 2
+      position: {x: -5, y: 25}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 5, y: -25}
+      direction: {x: 1, y: 0}
+    - type: 1
+      position: {x: -15, y: 5}
+      direction: {x: 0, y: 1}
+    - type: 1
+      position: {x: 15, y: -5}
+      direction: {x: 0, y: 1}
+  - level: 7
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -10, y: -15}
+      direction: {x: 1, y: 0}
+    - type: 2
+      position: {x: 10, y: 25}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: -10, y: 25}
+      direction: {x: -1, y: 0}
+    - type: 1
+      position: {x: 10, y: 5}
+      direction: {x: 0, y: 1}
+  - level: 8
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -15, y: -10}
+      direction: {x: 1, y: 0}
+    - type: 2
+      position: {x: 0, y: 10}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: -15, y: 10}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 0, y: -10}
+      direction: {x: 0, y: -1}
+    - type: 2
+      position: {x: 15, y: -10}
+      direction: {x: 1, y: 0}
+    - type: 1
+      position: {x: 15, y: 10}
+      direction: {x: 0, y: 1}
+  - level: 9
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -15, y: -10}
+      direction: {x: 0, y: -1}
+    - type: 0
+      position: {x: 0, y: -10}
+      direction: {x: 0, y: -1}
+    - type: 0
+      position: {x: 15, y: -10}
+      direction: {x: 0, y: -1}
+    - type: 1
+      position: {x: 15, y: 25}
+      direction: {x: 0, y: 1}
+  - level: 10
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -15, y: -10}
+      direction: {x: 1, y: 0}
+    - type: 0
+      position: {x: 0, y: -10}
+      direction: {x: 1, y: 0}
+    - type: 0
+      position: {x: 15, y: 25}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: -15, y: 10}
+      direction: {x: 1, y: 0}
+    - type: 2
+      position: {x: 0, y: 10}
+      direction: {x: 1, y: 0}
+    - type: 2
+      position: {x: 15, y: 10}
+      direction: {x: 1, y: 0}
+    - type: 1
+      position: {x: -7.5, y: 25}
+      direction: {x: 0, y: 1}
+  - level: 11
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -15, y: 25}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: -10, y: 5}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: -10, y: -5}
+      direction: {x: 0, y: -1}
+    - type: 2
+      position: {x: -15, y: 15}
+      direction: {x: -1, y: 0}
+    - type: 2
+      position: {x: 10, y: 15}
+      direction: {x: 0, y: 0}
+    - type: 2
+      position: {x: 17.5, y: 25}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: 17.5, y: -15}
+      direction: {x: 1, y: 0}
+    - type: 2
+      position: {x: -15, y: -15}
+      direction: {x: 0, y: -1}
+    - type: 2
+      position: {x: 10, y: -5}
+      direction: {x: 1, y: 0}
+    - type: 1
+      position: {x: 0, y: 5}
+      direction: {x: 0, y: 1}
+  - level: 12
+    gameUnitConfigDatas:
+    - type: 0
+      position: {x: -15, y: 0}
+      direction: {x: 0, y: -1}
+    - type: 0
+      position: {x: -5, y: -15}
+      direction: {x: 0, y: -1}
+    - type: 2
+      position: {x: 15, y: 0}
+      direction: {x: 1, y: 0}
+    - type: 2
+      position: {x: 15, y: 10}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: 5, y: 20}
+      direction: {x: 0, y: 1}
+    - type: 2
+      position: {x: -5, y: 20}
+      direction: {x: -1, y: 0}
+    - type: 1
+      position: {x: 5, y: -15}
+      direction: {x: 0, y: 1}
+    - type: 1
+      position: {x: -15, y: 10}
+      direction: {x: 0, y: 1}
