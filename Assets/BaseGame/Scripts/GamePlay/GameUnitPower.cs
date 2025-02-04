@@ -92,59 +92,53 @@ public class GameUnitPower : RoateableObject, ITransferPower
         RaycastHit2D hit = Physics2D.Raycast(FirePoint.transform.position, CurDirection);
         Vector3 endPosition = FirePoint.transform.position + (Vector3)CurDirection.Value * 100;
         Debug.DrawLine(FirePoint.transform.position, endPosition, Color.red, 2f);
-        if (hit.collider != null)
+        if (hit.collider == null)
         {
-            GameUnit gameUnit = hit.collider.GetComponent<GameUnit>();
-            if (gameUnit != null)
-            {
-                GameUnitCheckPoint checkPoint = hit.collider.GetComponent<GameUnitCheckPoint>();
-                if (checkPoint != null)
-                {
-                    CurCastTarget = checkPoint;
-                    if ((CurCastTarget as GameUnitCheckPoint).IsHavePower)
-                    {
-                        DrawLaserLine(CurCastTarget.transform.position - new Vector3(CurDirection.Value.x * 4f, CurDirection.Value.y * 4f, 0),false);
-                    }
-                    else
-                    {
-                        if ((CurCastTarget as GameUnitCheckPoint).IsCanHavePower((CurCastTarget as RoateableObject).CurDirection.Value, CurDirection))
-                        {
-                            DrawLaserLine(CurCastTarget.Transform.position,false, OnDrawCompleted);
-                        }
-                        else
-                        {
-                            DrawLaserLine(CurCastTarget.transform.position - new Vector3(CurDirection.Value.x * 4f, CurDirection.Value.y * 4f, 0), false);
-                        }
-
-                    }
-                    _disposable?.Dispose();
-                    _disposable = (CurCastTarget as GameUnitCheckPoint).CurDirection.ReactiveProperty
-                        .CombineLatest((CurCastTarget as GameUnitCheckPoint).IsHavePower.ReactiveProperty, (dir, power) => (dir,power))
-                        .Skip(1)
-                        .Subscribe(OnTargetRotate);
-                    return;
-                }
-                GameUnitPower power = hit.collider.GetComponent<GameUnitPower>();
-                if (power != null)
-                {
-                    CurCastTarget = power;
-                    DrawLaserLine(CurCastTarget.transform.position - new Vector3(CurDirection.Value.x * 1f, CurDirection.Value.y * 1f, 0),false);
-                    return;
-                }
-                GameUnitBattery battery = hit.collider.GetComponent<GameUnitBattery>();
-                if (battery != null)
-                {
-                    CurCastTarget = battery;
-                    DrawLaserLine(CurCastTarget.Transform.position,false, OnDrawCompleted);
-                    return;
-                }
-            }
-        }
-        else
-        {
-
-            //CurLine.DisablePrepare();
             DrawLaserLine(FirePoint.transform.position + new Vector3(CurDirection.Value.x * 5, CurDirection.Value.y * 5, 0), false);
+            return;
+        }
+        GameUnit gameUnit = hit.collider.GetComponent<GameUnit>();
+        if (gameUnit == null) return;
+        GameUnitCheckPoint checkPoint = hit.collider.GetComponent<GameUnitCheckPoint>();
+        if (checkPoint != null)
+        {
+            CurCastTarget = checkPoint;
+            if ((CurCastTarget as GameUnitCheckPoint).IsHavePower)
+            {
+                DrawLaserLine(CurCastTarget.transform.position - new Vector3(CurDirection.Value.x * 4f, CurDirection.Value.y * 4f, 0), false);
+            }
+            else
+            {
+                if ((CurCastTarget as GameUnitCheckPoint).IsCanHavePower((CurCastTarget as RoateableObject).CurDirection.Value, CurDirection))
+                {
+                    DrawLaserLine(CurCastTarget.Transform.position, false, OnDrawCompleted);
+                }
+                else
+                {
+                    DrawLaserLine(CurCastTarget.transform.position - new Vector3(CurDirection.Value.x * 4f, CurDirection.Value.y * 4f, 0), false);
+                }
+
+            }
+            _disposable?.Dispose();
+            _disposable = (CurCastTarget as GameUnitCheckPoint).CurDirection.ReactiveProperty
+                .CombineLatest((CurCastTarget as GameUnitCheckPoint).IsHavePower.ReactiveProperty, (dir, power) => (dir, power))
+                .Skip(1)
+                .Subscribe(OnTargetRotate);
+            return;
+        }
+        GameUnitPower power = hit.collider.GetComponent<GameUnitPower>();
+        if (power != null)
+        {
+            CurCastTarget = power;
+            DrawLaserLine(CurCastTarget.transform.position - new Vector3(CurDirection.Value.x * 4f, CurDirection.Value.y * 4f, 0), false);
+            return;
+        }
+        GameUnitBattery battery = hit.collider.GetComponent<GameUnitBattery>();
+        if (battery != null)
+        {
+            CurCastTarget = battery;
+            DrawLaserLine(CurCastTarget.Transform.position, false, OnDrawCompleted);
+            return;
         }
     }
     public void DrawLaserLine(Vector3 endPos,bool isImmediate, Action action = null)
@@ -187,32 +181,22 @@ public class GameUnitPower : RoateableObject, ITransferPower
     }
     public void OnTargetRotate((Vector2 targetDirection, bool isHavePower) value)
     {
-        //CurLine.DisablePrepare();
         Debug.Log(CurCastTarget.name + "OnTargetRotateCompleted" + Time.deltaTime);
-        if (CurCastTarget != null)
+        if (CurCastTarget == null) return;
+        if (CurCastTarget is GameUnitCheckPoint)
         {
-            if (CurCastTarget is GameUnitCheckPoint)
+            if (!(CurCastTarget as IRecivePower).IsCanHavePower((CurCastTarget as RoateableObject).CurDirection, CurDirection))
             {
-                //if((CurCastTarget as GameUnitCheckPoint).IsHavePower.Value)
-                //{
-                //    IsCastingLine = true;
-                //    DrawLaserLine(CurCastTarget.transform.position, true, OnDrawCompleted);
-                //    Debug.Log(CurCastTarget.name + "Can have power" + Time.deltaTime);
-                //    return;
-                //}
-                if (!(CurCastTarget as IRecivePower).IsCanHavePower((CurCastTarget as RoateableObject).CurDirection, CurDirection))
-                {
-                    IsCastingLine = true;
-                    IsGivingPower.Value = false;
-                    DrawLaserLine(CurCastTarget.transform.position - new Vector3(CurDirection.Value.x * 4f, CurDirection.Value.y * 4f, 0f), true);
-                    Debug.Log(CurCastTarget.name + "Cant have power" + Time.deltaTime);
-                }
-                else
-                {
-                    IsCastingLine = true;
-                    DrawLaserLine(CurCastTarget.transform.position,true,OnDrawCompleted);
-                    Debug.Log(CurCastTarget.name + "Can have power" + Time.deltaTime);
-                }
+                IsCastingLine = true;
+                IsGivingPower.Value = false;
+                DrawLaserLine(CurCastTarget.transform.position - new Vector3(CurDirection.Value.x * 4f, CurDirection.Value.y * 4f, 0f), true);
+                Debug.Log(CurCastTarget.name + "Cant have power" + Time.deltaTime);
+            }
+            else
+            {
+                IsCastingLine = true;
+                DrawLaserLine(CurCastTarget.transform.position, true, OnDrawCompleted);
+                Debug.Log(CurCastTarget.name + "Can have power" + Time.deltaTime);
             }
         }
     }

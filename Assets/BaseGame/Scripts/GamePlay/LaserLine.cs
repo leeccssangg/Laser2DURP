@@ -42,6 +42,9 @@ public class LaserLine : ACachedMonoBehaviour
     }
     public void Setup(Vector3 startPos, Vector3 endPos,bool isImmeditate, Action actionCallBack = null)
     {
+        StartPosEffect.SetActive(true);
+        EndPosEffect.SetActive(false);
+        _tween?.Kill();
         //Get LineRender and ParticleSystem components from current prefab;  
         _actionCallBack = actionCallBack;
         StartPos = startPos;
@@ -55,112 +58,56 @@ public class LaserLine : ACachedMonoBehaviour
         {
             if (!AllPs.isPlaying) AllPs.Play();
         }
-        StartPosEffect.SetActive(true);
+        foreach (var AllPs in EffectsEndPos)
+        {
+            if (!AllPs.isPlaying) AllPs.Play();
+        }
         //Texture tiling
         Length[0] = MainTextureLength * (Vector3.Distance(transform.position, EndPos));
         Length[2] = NoiseTextureLength * (Vector3.Distance(transform.position, EndPos));
-        _tween?.Kill();
         if (!isImmeditate)
         {
-            _tween = DOVirtual.DelayedCall(0f, () =>
-            {
+            //DOVirtual.DelayedCall(0f, () =>
+            //{
                 // Animate the LineRenderer from startPos to endPos
-                float time = Vector3.Distance(StartPos, EndPos) / 200f;
-                DOTween.To(() => Laser.GetPosition(1), x => Laser.SetPosition(1, x), EndPos, time)
+                float time = Vector3.Distance(StartPos, EndPos) / 100f;
+                _tween = DOTween.To(() => Laser.GetPosition(1), x => Laser.SetPosition(1, x), EndPos, time)
                        .OnUpdate(OnDrawing)
                        .OnComplete(OnDrawCompleted)
                        .SetEase(Ease.Linear);
-            });
+            //});
         }
         else
         {
             Laser.SetPosition(1, EndPos);
             OnDrawCompleted();
         }
-        //if (Laser.material.HasProperty("_SpeedMainTexUVNoiseZW")) LaserStartSpeed = Laser.material.GetVector("_SpeedMainTexUVNoiseZW");
-        //Save [1] and [3] textures speed
-        //{ DISABLED AFTER UPDATE}
-        //LaserSpeed = LaserStartSpeed;
     }
     public void OnDrawCompleted()
     {
+        EndPosEffect.SetActive(true);
         _actionCallBack?.Invoke();
         Debug.Log("LaserLine DrawCompleted" + Time.deltaTime);
     }
     public void OnDrawing()
     {
-
+        if (!Laser.enabled)
+        {
+            _tween?.Kill();
+            StartPosEffect.SetActive(false);
+            EndPosEffect.SetActive(false);
+        }
     }
-    //void Update()
-    //{
-    //    //if (Laser.material.HasProperty("_SpeedMainTexUVNoiseZW")) Laser.material.SetVector("_SpeedMainTexUVNoiseZW", LaserSpeed);
-    //    //SetVector("_TilingMainTexUVNoiseZW", Length); - old code, _TilingMainTexUVNoiseZW no more exist
-
-    //    //To set LineRender position
-    //    if (Laser != null && UpdateSaver == false)
-    //    {
-
-    //        //ADD THIS IF YOU WANNT TO USE LASERS IN 2D:
-    //        RaycastHit2D hit = Physics2D.Raycast(StartPos, transform.up, MaxLength);       
-    //        if (hit.collider != null)//CHANGE THIS IF YOU WANT TO USE LASERRS IN 2D: if (hit.collider != null)
-    //        {
-    //            //End laser position if collides with object
-
-    //            //Texture speed balancer {DISABLED AFTER UPDATE}
-    //            //LaserSpeed[0] = (LaserStartSpeed[0] * 4) / (Vector3.Distance(transform.position, hit.point));
-    //            //LaserSpeed[2] = (LaserStartSpeed[2] * 4) / (Vector3.Distance(transform.position, hit.point));
-    //            //Destroy(hit.transform.gameObject); // destroy the object hit
-    //            //hit.collider.SendMessage("SomeMethod"); // example
-    //            /*if (hit.collider.tag == "Enemy")
-    //            {
-    //                hit.collider.GetComponent<HittedObject>().TakeDamage(damageOverTime * Time.deltaTime);
-    //            }*/
-    //        }
-    //        else
-    //        {
-    //            //End laser position if doesn't collide with object
-    //            var EndPos = transform.position + transform.up * MaxLength;
-    //            Laser.SetPosition(1, EndPos);
-    //            //Texture tiling
-    //            Length[0] = MainTextureLength * (Vector3.Distance(transform.position, EndPos));
-    //            Length[2] = NoiseTextureLength * (Vector3.Distance(transform.position, EndPos));
-    //            //LaserSpeed[0] = (LaserStartSpeed[0] * 4) / (Vector3.Distance(transform.position, EndPos)); {DISABLED AFTER UPDATE}
-    //            //LaserSpeed[2] = (LaserStartSpeed[2] * 4) / (Vector3.Distance(transform.position, EndPos)); {DISABLED AFTER UPDATE}
-    //        }
-    //        //Insurance against the appearance of a laser in the center of coordinates!
-    //        if (Laser.enabled == false && LaserSaver == false)
-    //        {
-    //            LaserSaver = true;
-    //            Laser.enabled = true;
-    //        }
-    //    }
-    //}
-
     public void DisablePrepare()
     {
         if (Laser != null)
         {
             Laser.enabled = false;
         }
-        //UpdateSaver = true;
-        //Effects can = null in multiply shooting
-        if (EffectsStartPos != null)
-        {
-            foreach (var AllPs in EffectsStartPos)
-            {
-                if (AllPs.isPlaying) AllPs.Stop();
-            }
-        }
-        if (EffectsEndPos != null)
-        {
-            foreach (var AllPs in EffectsEndPos)
-            {
-                if (AllPs.isPlaying) AllPs.Stop();
-            }
-        }
+        _tween?.Kill();
         StartPosEffect.SetActive(false);
         EndPosEffect.SetActive(false);
-        _tween?.Kill();
+        EndPosEffect.transform.position = StartPos;
         Debug.Log("LaserLine DisablePrepare" + Time.deltaTime);
     }
 }

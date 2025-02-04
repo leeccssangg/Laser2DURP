@@ -61,6 +61,7 @@ public class LevelManager : Singleton<LevelManager>
         IsWinning.Value = false;
         IsCheckingWin.Value = false;
         LevelConfigData levelConfigData = LevelGlobalConfig.Instance.GetLevelConfigData(level);
+        Camera.main.orthographicSize = levelConfigData.cameraSize;
         for (int i = 0; i < levelConfigData.gameUnitConfigDatas.Count; i++)
         {
             GameUnitConfigData config = levelConfigData.gameUnitConfigDatas[i];

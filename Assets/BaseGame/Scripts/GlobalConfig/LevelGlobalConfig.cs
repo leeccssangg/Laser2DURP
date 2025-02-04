@@ -53,11 +53,13 @@ public class LevelGlobalConfig : GlobalConfig<LevelGlobalConfig>
         LevelConfigData curLevelConfig = GetLevelConfigData(levelConfig.level);
         if(curLevelConfig!=null)
         {
+            curLevelConfig.cameraSize = levelConfig.CameraSize;
             curLevelConfig.gameUnitConfigDatas.Clear();
             curLevelConfig.gameUnitConfigDatas.AddRange(levelConfigData.gameUnitConfigDatas);
         }
         else
         {
+            levelConfigData.cameraSize = levelConfig.CameraSize;
             LevelConfigs.Add(levelConfigData);
         }
         AssetDatabase.SaveAssets();
@@ -89,6 +91,7 @@ public class LevelConfigData
 {
     public int level;
     public List<GameUnitConfigData> gameUnitConfigDatas = new();
+    public float cameraSize;
 }
 [System.Serializable]
 public class GameUnitConfigData

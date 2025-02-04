@@ -21,6 +21,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 0, y: 20}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 2
     gameUnitConfigDatas:
     - type: 0
@@ -35,6 +36,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 10, y: 20}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 3
     gameUnitConfigDatas:
     - type: 0
@@ -52,6 +54,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 10, y: 0}
       direction: {x: 0, y: 1}
+    cameraSize: 55
   - level: 4
     gameUnitConfigDatas:
     - type: 0
@@ -78,6 +81,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 15, y: 30}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 5
     gameUnitConfigDatas:
     - type: 0
@@ -104,6 +108,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 15, y: 30}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 6
     gameUnitConfigDatas:
     - type: 0
@@ -130,6 +135,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 15, y: -5}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 7
     gameUnitConfigDatas:
     - type: 0
@@ -144,6 +150,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 10, y: 5}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 8
     gameUnitConfigDatas:
     - type: 0
@@ -164,6 +171,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 15, y: 10}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 9
     gameUnitConfigDatas:
     - type: 0
@@ -178,6 +186,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 15, y: 25}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 10
     gameUnitConfigDatas:
     - type: 0
@@ -201,6 +210,7 @@ MonoBehaviour:
     - type: 1
       position: {x: -7.5, y: 25}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 11
     gameUnitConfigDatas:
     - type: 0
@@ -217,7 +227,7 @@ MonoBehaviour:
       direction: {x: -1, y: 0}
     - type: 2
       position: {x: 10, y: 15}
-      direction: {x: 0, y: 0}
+      direction: {x: 0, y: 1}
     - type: 2
       position: {x: 17.5, y: 25}
       direction: {x: 0, y: 1}
@@ -233,6 +243,7 @@ MonoBehaviour:
     - type: 1
       position: {x: 0, y: 5}
       direction: {x: 0, y: 1}
+    cameraSize: 50
   - level: 12
     gameUnitConfigDatas:
     - type: 0
@@ -259,3 +270,4 @@ MonoBehaviour:
     - type: 1
       position: {x: -15, y: 10}
       direction: {x: 0, y: 1}
+    cameraSize: 50

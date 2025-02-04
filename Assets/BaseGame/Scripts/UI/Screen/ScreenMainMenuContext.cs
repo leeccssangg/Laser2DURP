@@ -41,7 +41,7 @@ public class ScreenMainMenuContext
     {
         [field: Title(nameof(UIView))]
         [field: SerializeField] public CanvasGroup MainView {get; private set;}
-        [field: SerializeField] public UIResourceCoin UIResourceCoin {get; private set;}
+        //[field: SerializeField] public UIResourceCoin UIResourceCoin {get; private set;}
         [field: SerializeField] public Button ButtonSetting {get; private set;}
         [field: SerializeField] public Button ButtonPlay {get; private set;}
         [field: SerializeField] public Button ButtonShop {get; private set;}
@@ -54,7 +54,7 @@ public class ScreenMainMenuContext
 
         public UniTask Initialize(Memory<object> args)
         {
-            UIResourceCoin.Initialize(args);  
+            //UIResourceCoin.Initialize(args);  
             return UniTask.CompletedTask;
         }
         public void OnLevelChange(int level)
@@ -142,11 +142,11 @@ public class ScreenMainMenuContext
         }
         public void OnNotiDailyQuest(bool isActive)
         {
-            View.GONotiDailyQuest.SetActive(isActive);
+            //View.GONotiDailyQuest.SetActive(isActive);
         }
         public void OnNotiDailyGift(bool isActive)
         {
-            View.GONotiDailyGift.SetActive(isActive);
+            //View.GONotiDailyGift.SetActive(isActive);
         }
     }
 }

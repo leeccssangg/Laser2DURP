@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using TW.Utility.CustomComponent;
+using UnityEditor;
 using UnityEngine;
 
 public class LevelConfig : ACachedMonoBehaviour
@@ -10,11 +11,32 @@ public class LevelConfig : ACachedMonoBehaviour
     public List<GameUnitPower> power = new();
     public List<GameUnitCheckPoint> checkPoints = new();
     public List<GameUnitBattery> batteries = new();
+    public float CameraSize;
 
 #if UNITY_EDITOR
     [Button]
     public void SaveLevelConfig()
     {
+        //this.CameraSize = Camera.main.orthographicSize;
+        //Camera mainCamera = Camera.main;
+        //if (mainCamera == null)
+        //{
+        //    // Try to get the SceneView camera if Camera.main is not available
+        //    SceneView sceneView = SceneView.lastActiveSceneView;
+        //    if (sceneView != null && sceneView.camera != null)
+        //    {
+        //        mainCamera = sceneView.camera;
+        //    }
+        //}
+
+        //if (mainCamera != null && mainCamera.orthographic)
+        //{
+        //    this.CameraSize = mainCamera.orthographicSize;
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("No orthographic camera found.");
+        //}
         LevelGlobalConfig.Instance.SaveLevelConfig(this);
     }
     [Button]
@@ -73,6 +95,7 @@ public class LevelConfig : ACachedMonoBehaviour
                     break;
             }
         }
+        Camera.main.orthographicSize = levelConfigData.cameraSize;
     }
 #endif
 }

@@ -118,7 +118,15 @@ public class ModalWinContext
             InGameDataManager.Instance.SaveData();
             //AllQuestManager.Instance.Notify(MissionTarget.COMPLETE_LEVEL, "1");
             ViewOptions options = new ViewOptions(nameof(ActivityMatchMaking));
-            await ActivityContainer.Find(ContainerKey.Activities).ShowAsync(options, true,true);
+            if(InGameDataManager.Instance.InGameData.LevelSaveData.Level.Value < 3)
+            {
+                await ActivityContainer.Find(ContainerKey.Activities).ShowAsync(options, true, true);
+            }
+            else
+            {
+                await ActivityContainer.Find(ContainerKey.Activities).ShowAsync(options, false, true);
+            }
+
         }
     }
 }
